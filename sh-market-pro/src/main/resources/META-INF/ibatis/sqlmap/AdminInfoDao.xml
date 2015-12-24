@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alwaysRun.sh_market.dao.AdminInfoDao">
+
+	<resultMap id="adminInfo" type="com.alwaysRun.sh_market.bean.AdminInfo">
+		<id property="adminId" column="adminId" />
+		<result property="userName" column="userName" />
+		<result property="passWord" column="passWord" />
+		<result property="memo" column="memo" />
+	</resultMap>
+
+	<sql id="allColumn">
+	adminId,userName,passWord,memo
+	</sql>
+
+	<!-- <insert id="add" parameterMap="userInfo">
+		INSERT INTO
+		`user`(`userName`,`userSex`,`mobilePhone`,`birthday`,`userPsd`)
+		VALUES(#{userName},#{userSex},#{mobilePhone},#{birthday},#{userPsd})
+	</insert> -->
+
+	<select id="find" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		FROM `admin_info`
+		WHERE `userName` = #{userName}
+		AND `passWord` = #{psw} 
+	</select>
+
+</mapper>
