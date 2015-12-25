@@ -70,7 +70,8 @@
 	</select>
 	
 	<select id="findTotalNum" resultType="java.lang.Integer">
-	    SELECT COUNT(1) FROM `user_info`
+	    SELECT COUNT(1) FROM `user_info` 
+	    WHERE status = 1
 	</select>
 
 </mapper>

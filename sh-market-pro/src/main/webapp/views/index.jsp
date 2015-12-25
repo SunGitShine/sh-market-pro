@@ -36,7 +36,8 @@
 
     
 
-    <script>
+    <script type="text/javascript">
+    
     function getclassname(obj){
 		if(document.getElementsByClassName('link_onclick').length==0){
 			obj.className='link_onclick';
@@ -47,8 +48,6 @@
 				obj1.id='1';
 				obj.className='link_onclick';
 			   obj.id='link_onclick';
-				
-			
 			}
 
 		
@@ -80,10 +79,10 @@
      <!-- Header start -->
        <div class="top">
     <div class="logo">
-    <input type="text" name="appid" id="appid">
+    <!-- <input type="text" name="appid" id="appid">
     <a href="" id="turn" target="right" onClick="subData()"><input type="button" value="æ¥è¯¢"></a>&nbsp&nbsp&nbsp&nbsp&nbsp
     <input type="text" name="openId" id="openId" value="openId" onclick="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}" style="color:#999">
-    <a href="" id="send" target="right" onClick="send()"><input type="button" value="åé"></a>
+    <a href="" id="send" target="right" onClick="send()"><input type="button" value="åé"></a> -->
     </div>
      <div class="login">
     <img src="<%=path %>/image/login.png"  />
@@ -102,10 +101,18 @@
 
     <div id="main_navigation" class="dark_navigation"> <!-- Main navigation start -->
         <div class="inner_navigation" >
-
             <ul class="main" >
-                <li><a href="/find.htm?type=image" target="right" onClick="getclassname(this)"><i class="icon-reorder"></i>&nbsp;&nbsp;用户</a></li>
-                <li><a href="/find.htm?type=voice" target="right" onClick="getclassname(this)"><i class="icon-reorder"></i>&nbsp;&nbsp;商品</a></li>
+                <li><a href="<%=path%>/user/findAll.htm?pageNo=1" target="right" onClick="getclassname(this)"><i class="icon-reorder"></i>&nbsp;&nbsp;用户管理</a></li>
+                <!-- <li><a href="/find.htm?type=voice" target="right" onClick="getclassname(this)"><i class="icon-reorder"></i>&nbsp;&nbsp;商品管理</a></li> -->
+                <li ><a class="expand"  href="dashboard.html"><i class="icon-home"></i>&nbsp;&nbsp;商品管理</a>
+                    <ul class="sub_main" style="background-color: #20477C;">
+                          <div style=" height:8px; width:100%;"></div>
+                          <li><a href="<%=path%>/goods/findAll.htm?classify=1" target="right" onClick="getclassname(this)">学习&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="float:right;font-size:20px;">></font></a></li>
+                          <li><a href="<%=path%>/goods/findAll.htm?classify=2" target="right" onClick="getclassname(this)">生活&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="float:right;font-size:20px;">></font></a></li>
+                          <li><a href="<%=path%>/goods/findAll.htm?classify=3" target="right" onClick="getclassname(this)">其他&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="float:right;font-size:20px;">></font></a></li>
+                           <div style=" height:8px; width:100%;"></div>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -113,7 +120,7 @@
     <div id="content" class="no-sidebar">
      <!-- Content start -->
  
-            <iframe  class="inner_navigation1" name="right" src="" frameborder="0" width="100%" scrolling="auto" height="100%"></iframe>
+            <iframe  class="inner_navigation1" name="right" src="<%=path%>/user/findAll.htm?pageNo=1" frameborder="0" width="100%" scrolling="auto" height="100%"></iframe>
 
                <!-- Content END --> 
             </div>

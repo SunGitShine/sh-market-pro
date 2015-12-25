@@ -53,4 +53,6 @@ public interface GoodsInfoDao {
 	 */
 	int findToTalNum(@Param("classify") String classify,
 			@Param("userId") int userId);
+	
+	List<GoodsInfo> findAll(@Param("classify") String classify);
 }

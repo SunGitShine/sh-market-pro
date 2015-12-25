@@ -55,4 +55,12 @@ public class GoodsInfoDaoTest extends DaoTest{
 		int num=goodsInfoDao.findToTalNum("1", 1);
 		System.out.println(num);
 	}
+	
+	@Test
+	public void findAll(){
+		List<GoodsInfo> goodsList=goodsInfoDao.findAll("1");
+		for(GoodsInfo goods:goodsList){
+			System.out.println(goods.toString());
+		}
+	}
 }

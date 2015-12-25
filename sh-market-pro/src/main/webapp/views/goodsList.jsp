@@ -13,7 +13,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flatpoint - Responsive Web App Template</title>
+    <title></title>
   
     <meta name="description" content="">
     <meta name="author" content="">
@@ -48,11 +48,11 @@
           <div class="widgets_area">
                 <div class="row-fluid">
                     <div class="span12">
-                         <div  class="daohanglink"style="">
+                         <div  class="daohanglink" style="">
                            <span class="daohang"></span>
                            <span>首页</span><span>></span>
                           
-                           <span>用户管理</span>
+                           <span>商品管理</span>
                           <!--  <a  href="客户管理tab.html" class="label label-warning" style="float:right; margin:8px;">添加</a> -->
                          </div>
                         <div class="well brown">
@@ -62,28 +62,32 @@
                                 <table class="table table-striped table-bordered table-hover datatable">
                                     <thead>
                                         <tr>
-                                            <th width="20%">头像</th>
-                                            <th width="15%">昵称</th>
-                                            <th width="10%">性别</th>
-                                            <th width="15%">城市</th>
-                                            <th width="15%">关注时间</th>
-                                            <th width="10%">openId</th>
+                                            <th width="10%">图片</th>
+                                            <th width="10%">发布人</th>
+                                            <th width="15%">标题</th>
+                                            <th width="10%">价格</th>
+                                            <th width="15%">联系人</th>
+                                            <th width="10%">电话</th>
+                                            <th width="10%">QQ</th>
+                                            <th width="10%">发布时间</th>
+                                            <th width="25%">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="user" items="${data.records}">
+                                    <c:forEach var="goods" items="${goodsList }">
                                         <tr>
-                                            <td>${user.headimgurl }</td>
-                                            <td>${user.nickname }</td>
-                                            <td>${user.sex }</td>
-                                            <td>${user.city }</td>
-                                            <td>${user.subscribe_time }</td>
-                                            <td>${user.openid }</td>
-                                           <!--  <td>
-                                            <a class="btn" href="#" title="修改"><i class="icon-inbox"></i></a>
-                                            <a class="btn" href="#" title="删除"><i class="icon-trash"></i></a>
+                                            <td>${goods.picture }</td>
+                                            <td>${goods.memo }</td>
+                                            <td>${goods.title }</td>
+                                            <td>${goods.price }</td>
+                                            <td>${goods.contacts }</td>
+                                            <td>${goods.phone }</td>
+                                            <td>${goods.QQ }</td>
+                                            <td>${goods.publishTime }</td>
+                                           <td>
+                                            <a class="btn" href="<%=path %>/goods/delete.htm?goodsId=${goods.goodsId}" title="删除"><i class="icon-trash"></i></a>
                                             <a class="btn" href="#" title="查看"><i class="icon-exclamation"></i></a>
-                                            </td> -->
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
