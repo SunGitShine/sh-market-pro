@@ -12,9 +12,15 @@
 <HEAD>
 <META content="IE=11.0000" http-equiv="X-UA-Compatible">
 
+
+
 <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <TITLE>登录页面</TITLE>
+
 <SCRIPT src="<%=path %>/js/jquery-1.9.1.min.js" type="text/javascript"></SCRIPT>
+
+
 
 <STYLE>
 body {
@@ -61,7 +67,7 @@ body {
 }
 
 .u_logo {
-	background: url("<%=path%>/images/username.png") no-repeat;
+	background: url("<%=path %>/images/username.png") no-repeat;
 	padding: 10px 10px;
 	position: absolute;
 	top: 43px;
@@ -69,7 +75,7 @@ body {
 }
 
 .p_logo {
-	background: url("<%=path%>/images/password.png") no-repeat;
+	background: url("<%=path %>/images/password.png") no-repeat;
 	padding: 10px 10px;
 	position: absolute;
 	top: 12px;
@@ -81,7 +87,7 @@ a {
 }
 
 .tou {
-	background: url("<%=path%>/images/tou.png") no-repeat;
+	background: url("<%=path %>/images/tou.png") no-repeat;
 	width: 97px;
 	height: 92px;
 	position: absolute;
@@ -90,7 +96,7 @@ a {
 }
 
 .left_hand {
-	background: url("<%=path%>/images/left_hand.png") no-repeat;
+	background: url("<%=path %>/images/left_hand.png") no-repeat;
 	width: 32px;
 	height: 37px;
 	position: absolute;
@@ -99,7 +105,7 @@ a {
 }
 
 .right_hand {
-	background: url("<%=path%>/images/right_hand.png") no-repeat;
+	background: url("<%=path %>/images/right_hand.png") no-repeat;
 	width: 32px;
 	height: 37px;
 	position: absolute;
@@ -108,7 +114,7 @@ a {
 }
 
 .initial_left_hand {
-	background: url("<%=path%>/images/hand.png") no-repeat;
+	background: url("<%=path %>/images/hand.png") no-repeat;
 	width: 30px;
 	height: 20px;
 	position: absolute;
@@ -117,7 +123,7 @@ a {
 }
 
 .initial_right_hand {
-	background: url("<%=path%>/images/hand.png") no-repeat;
+	background: url("<%=path %>/images/hand.png") no-repeat;
 	width: 30px;
 	height: 20px;
 	position: absolute;
@@ -126,7 +132,7 @@ a {
 }
 
 .left_handing {
-	background: url("<%=path%>/images/left-handing.png") no-repeat;
+	background: url("<%=path %>/images/left-handing.png") no-repeat;
 	width: 30px;
 	height: 20px;
 	position: absolute;
@@ -135,7 +141,7 @@ a {
 }
 
 .right_handinging {
-	background: url("<%=path%>/images/right_handing.png") no-repeat;
+	background: url("<%=path %>/images/right_handing.png") no-repeat;
 	width: 30px;
 	height: 20px;
 	position: absolute;
@@ -144,11 +150,9 @@ a {
 }
 </STYLE>
 
+
+
 <SCRIPT type="text/javascript">
-	
-	$(document).ready(function(){
-		var msg=$("#msg").val();
-	});
 
 	$(function() {
 		//得到焦点
@@ -181,67 +185,88 @@ a {
 			$("#right_hand").attr("class", "initial_right_hand");
 			$("#right_hand").attr("style", "right:-112px;top:-12px");
 		});
+		
 		//登录
-		 $("#login_sub").click(function(){
+		$("#login_sub").click(function(){
 				//alert("hello");
 				<%-- $("#submitForm").attr("action", "<%=basePath%>admin/login.htm").submit(); --%>
 				var username = $('#userName').val();
-	        	var password = $('#psw').val();
-	        	var url = "<%=path%>/admin/login.htm";
-	        	
-	        	var params = {
-	            		"userName" : username,
-	            		"psw" : password
-	            	};
-	        	
-	        	 $.ajax({
-                 	type : "post",
-     				dataType : "json",
-     				data : params,
-     				url : url,
-     				async : false,
-                   	success : function(data){
-                   		if(data.msg==''){
-                   			window.location.href="<%=path%>/views/index.jsp";
-                   		}else{
-                   			alert("登录失败，请重新登录");
-                   		}
-                   	}
-	        	 });
-		 });
+		   	var password = $('#password').val();
+		   	var url = "<%=path%>/admin/login.htm";
+		   	
+		   	var params = {
+		       		"userName" : username,
+		       		"psw" : password
+		       	};
+		   	
+		   	 $.ajax({
+		        	type : "post",
+					dataType : "json",
+					data : params,
+					url : url,
+					async : false,
+		          	success : function(data){
+		          		if(data.msg==''){
+		          			window.location.href="<%=path%>/views/index.jsp";
+		          		}else{
+		          			alert("登录失败，请重新登录");
+		          		}
+		          	}
+		   	 });
+		});
 	});
-	
 </SCRIPT>
+
+
 
 <META name="GENERATOR" content="MSHTML 11.00.9600.17496">
 </HEAD>
+
 <BODY>
-	<DIV class="top_div"><input type="hidden" id="msg">${msg}</input></DIV>
-	<form action="" id="submitForm" method="post">
+
+	<DIV class="top_div"></DIV>
+
 	<DIV
 		style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
+
 		<DIV style="width: 165px; height: 96px; position: absolute;">
+
 			<DIV class="tou"></DIV>
+
 			<DIV class="initial_left_hand" id="left_hand"></DIV>
+
 			<DIV class="initial_right_hand" id="right_hand"></DIV>
 		</DIV>
+
 		<P style="padding: 30px 0px 10px; position: relative;">
-			<SPAN class="u_logo"></SPAN> <INPUT class="ipt" type="text" id="userName" name="userName" placeholder="请输入用户名" value="">
+			<SPAN class="u_logo"></SPAN> <INPUT class="ipt" type="text" id="userName"
+				placeholder="请输入用户名或邮箱" value="">
+
 		</P>
+
 		<P style="position: relative;">
-			<SPAN class="p_logo"></SPAN> <INPUT class="ipt" id="psw" name="psw" type="password" placeholder="请输入密码" value="">
+			<SPAN class="p_logo"></SPAN> <INPUT class="ipt" id="password"
+				type="password" placeholder="请输入密码" value="">
+
 		</P>
+
 		<DIV
 			style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
+
 			<P style="margin: 0px 35px 20px 45px;">
 				<SPAN style="float: left;"></SPAN> <SPAN
 					style="float: right;">
+
 					<A
 					style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;"
 					id="login_sub">登录</A> </SPAN>
 			</P>
 		</DIV>
 	</DIV>
-	</form>
+
+	<div style="text-align: center;">
+
+	</div>
 </BODY>
 </HTML>
+
