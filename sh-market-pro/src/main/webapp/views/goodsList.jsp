@@ -77,7 +77,12 @@
                                     <c:forEach var="goods" items="${goodsList }">
                                         <tr>
                                             <td>${goods.picture }</td>
+                                            <c:if test="${goods.classify=='0'}">
+                                            <td><font color="red">${goods.memo }</font></td>
+                                            </c:if>
+                                            <c:if test="${goods.classify=='1'}">
                                             <td>${goods.memo }</td>
+                                            </c:if>
                                             <td>${goods.title }</td>
                                             <td>${goods.price }</td>
                                             <td>${goods.contacts }</td>
@@ -86,7 +91,7 @@
                                             <td>${goods.publishTime }</td>
                                            <td>
                                             <a class="btn" href="<%=path %>/goods/delete.htm?goodsId=${goods.goodsId}" title="删除"><i class="icon-trash"></i></a>
-                                            <a class="btn" href="#" title="查看"><i class="icon-exclamation"></i></a>
+                                            <a class="btn" href="<%=path %>/goods/findById.htm?goodsId=${goods.goodsId}" title="查看"><i class="icon-exclamation"></i></a>
                                             </td>
                                         </tr>
                                     </c:forEach>

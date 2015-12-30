@@ -18,12 +18,13 @@
 		<result property="remark" column="remark" />
 		<result property="groupid" column="groupid" />
 		<result property="status" column="status" />
+		<result property="isFriend" column="isFriend" />
 		<result property="memo" column="memo" />
 	</resultMap>
 
 	<sql id="allColumn">
 		userId,subscribe,openid,nickname,sex,city,country,province,
-		language,headimgurl,subscribe_time,remark,groupid,status,memo
+		language,headimgurl,subscribe_time,remark,groupid,status,isFriend,memo
 	</sql>
 
 	<insert id="add" parameterType="UserInfo">
@@ -73,5 +74,21 @@
 	    SELECT COUNT(1) FROM `user_info` 
 	    WHERE status = 1
 	</select>
+	
+	<update id="deFriend">
+		UPDATE
+		`user_info` SET
+		isFriend = 0
+		WHERE
+		userId=#{userId}
+	</update>
+	
+	<update id="isFriend">
+		UPDATE
+		`user_info` SET
+		isFriend = 1
+		WHERE
+		userId=#{userId}
+	</update>
 
 </mapper>

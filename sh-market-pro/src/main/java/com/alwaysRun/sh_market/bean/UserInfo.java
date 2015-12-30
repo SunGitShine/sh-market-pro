@@ -18,6 +18,7 @@ public class UserInfo implements Serializable{
 	private String remark;
 	private String groupid;
 	private String status;
+	private int isFriend;
 	private String memo;
 	public int getUserId() {
 		return userId;
@@ -109,14 +110,21 @@ public class UserInfo implements Serializable{
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	public int getIsFriend() {
+		return isFriend;
+	}
+	public void setIsFriend(int isFriend) {
+		this.isFriend = isFriend;
+	}
 	@Override
 	public String toString() {
-		return "userInfo [userId=" + userId + ", subscribe=" + subscribe
+		return "UserInfo [userId=" + userId + ", subscribe=" + subscribe
 				+ ", openid=" + openid + ", nickname=" + nickname + ", sex="
 				+ sex + ", city=" + city + ", country=" + country
 				+ ", province=" + province + ", language=" + language
 				+ ", headimgurl=" + headimgurl + ", subscribe_time="
 				+ subscribe_time + ", remark=" + remark + ", groupid="
-				+ groupid + ", status=" + status + ", memo=" + memo + "]";
+				+ groupid + ", status=" + status + ", isFriend=" + isFriend
+				+ ", memo=" + memo + "]";
 	}
 }

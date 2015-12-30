@@ -45,4 +45,16 @@ public interface UserInfoDao {
 	 * @return
 	 */
 	int findTotalNum();
+	
+	/**
+	 * 拉黑用户（拉黑后，用户不能发布商品信息，该用户以前发布的商品信息不被列出）
+	 * @param userId
+	 */
+	void deFriend(@Param("userId") int userId);
+	
+	/**
+	 * 取消用户拉黑
+	 * @param userId
+	 */
+	void isFriend(@Param("userId") int userId);
 }

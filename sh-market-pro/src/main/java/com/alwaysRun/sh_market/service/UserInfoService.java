@@ -32,5 +32,13 @@ public class UserInfoService {
 		pageModel.setRecords(userList);
 		return pageModel;
 	}
+	
+	public void deFriend(int userId){
+		userDao.deFriend(userId);
+	}
+	
+	public void isFriend(int userId){
+		userDao.isFriend(userId);
+	}
 }
 

@@ -1,13 +1,11 @@
 package com.alwaysRun.sh_market.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,9 +24,27 @@ public class UserConTroller {
 	public String findAll(HttpServletRequest request,Model model){
 //		ModelMap map=new ModelMap();
 		PageModel<UserInfo> pageModel=new PageModel<UserInfo>();
- 		int pageNo=Integer.parseInt(request.getParameter("pageNo"));
+		int pageNo=1;
+		if(!StringUtils.isEmpty(request.getParameter("pageNo"))){
+			pageNo=Integer.parseInt(request.getParameter("pageNo"));
+		}
  		pageModel=userService.findByPage(pageNo);
  		model.addAttribute("data", pageModel);
 		return "userList";
+	}
+	
+	@RequestMapping(value="/deFriend", method={RequestMethod.GET,RequestMethod.POST})
+	public String deFriend(HttpServletRequest request){
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		userService.deFriend(userId);
+		return "redirect:/user/findAll.htm";
+	}
+	
+	@RequestMapping(value="/isFriend",method={RequestMethod.GET,RequestMethod.POST})
+	public String isFriend(HttpServletRequest request){
+		
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		userService.isFriend(userId);
+		return "redirect:/user/findAll.htm";
 	}
 }

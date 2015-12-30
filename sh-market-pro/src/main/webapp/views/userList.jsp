@@ -13,7 +13,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flatpoint - Responsive Web App Template</title>
+    <title>用户管理</title>
   
     <meta name="description" content="">
     <meta name="author" content="">
@@ -39,6 +39,17 @@
     <![endif]-->
   
   </head>
+  <script type="text/javascript">
+ 	 function defriend(userId){
+ 		alert("你确定拉黑该用户吗？");
+ 		window.location.href="<%=path%>/user/deFriend.htm?userId="+userId;
+ 	 }
+ 	 
+ 	 function isfriend(userId){
+ 		alert("你确定解除拉黑吗？");
+ 		window.location.href="<%=path%>/user/isFriend.htm?userId="+userId;
+ 	 }
+  </script>
 
   <body>
 
@@ -68,22 +79,27 @@
                                             <th width="15%">城市</th>
                                             <th width="15%">关注时间</th>
                                             <th width="10%">openId</th>
+                                            <th width="10%">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <c:forEach var="user" items="${data.records}">
                                         <tr>
                                             <td>${user.headimgurl }</td>
+                                            <c:if test="${user.isFriend=='0'}">
+                                            <td><font color="red">${user.nickname }</font></td>
+                                            </c:if>
+                                            <c:if test="${user.isFriend=='1'}">
                                             <td>${user.nickname }</td>
+                                            </c:if>
                                             <td>${user.sex }</td>
                                             <td>${user.city }</td>
-                                            <td>${user.subscribe_time }</td>
+                                             <td>${user.subscribe_time }</td>
                                             <td>${user.openid }</td>
-                                           <!--  <td>
-                                            <a class="btn" href="#" title="修改"><i class="icon-inbox"></i></a>
-                                            <a class="btn" href="#" title="删除"><i class="icon-trash"></i></a>
-                                            <a class="btn" href="#" title="查看"><i class="icon-exclamation"></i></a>
-                                            </td> -->
+                                           <td>
+                                            <a class="btn" onclick="defriend(${user.userId})" id="defriend" title="拉黑"><i class="icon-exclamation"></i></a>
+                                            <a class="btn" onclick="isfriend(${user.userId})" id="isfriend" title="取消拉黑"><i class="icon-inbox"></i></a>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
