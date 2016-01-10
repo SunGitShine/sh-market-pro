@@ -11,7 +11,7 @@ public interface ConfigStorageDao {
 
 	 public String getToken();
 	 
-	 public String getVerifyTicket();
+	 public String getJsapiTicket();
 	 
 	 public String getAccessToken();
 	 
@@ -21,7 +21,7 @@ public interface ConfigStorageDao {
 	 
 	 public void setToken(String token);
 	 
-	 public void setVerifyTicket(String verifyTicket,long timeout);
+	 public void setJsapiTicket(String jsapiTicket,long timeout);
 	 
 	 public void setAccessToken(String accessToken,long timeout);
 }

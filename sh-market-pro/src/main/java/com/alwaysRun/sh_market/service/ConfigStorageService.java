@@ -1,5 +1,7 @@
 package com.alwaysRun.sh_market.service;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -19,7 +21,7 @@ public class ConfigStorageService implements ConfigStorageDao,InitializingBean{
 	 public static String KEY_SUFFIX_SECRET               				   = "secret";
 	 public static String KEY_SUFFIX_TOKEN                       		   = "token";
 	 public static String KEY_SUFFIX_ACCESS_TOKEN          				   = "accesstoken";
-	 public static String KEY_SUFFIX_VERIFY_TICKET          			   = "verifyticket";
+	 public static String KEY_SUFFIX_JSAPI_TICKET          			   = "verifyticket";
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -35,7 +37,7 @@ public class ConfigStorageService implements ConfigStorageDao,InitializingBean{
 
 	@Override
 	public String getAppId() {
-		String key=(KEY_SUFFIX_APPID);
+		String key=getKey(KEY_SUFFIX_APPID);
 		Object obj = redisTemplate.opsForValue().get(key);
 		if (obj != null) {
 			return obj.toString();
@@ -45,7 +47,7 @@ public class ConfigStorageService implements ConfigStorageDao,InitializingBean{
 
 	@Override
 	public String getSecret() {
-		String key=(KEY_SUFFIX_SECRET);
+		String key=getKey(KEY_SUFFIX_SECRET);
 		Object obj = redisTemplate.opsForValue().get(key);
 		if (obj != null) {
 			return obj.toString();
@@ -55,7 +57,7 @@ public class ConfigStorageService implements ConfigStorageDao,InitializingBean{
 
 	@Override
 	public String getToken() {
-		String key=(KEY_SUFFIX_TOKEN);
+		String key=getKey(KEY_SUFFIX_TOKEN);
 		Object obj = redisTemplate.opsForValue().get(key);
 		if (obj != null) {
 			return obj.toString();
@@ -64,8 +66,8 @@ public class ConfigStorageService implements ConfigStorageDao,InitializingBean{
 	}
 
 	@Override
-	public String getVerifyTicket() {
-		String key=(KEY_SUFFIX_VERIFY_TICKET);
+	public String getJsapiTicket() {
+		String key=getKey(KEY_SUFFIX_JSAPI_TICKET);
 		Object obj = redisTemplate.opsForValue().get(key);
 		if (obj != null) {
 			return obj.toString();
@@ -75,7 +77,7 @@ public class ConfigStorageService implements ConfigStorageDao,InitializingBean{
 
 	@Override
 	public String getAccessToken() {
-		String key=(KEY_SUFFIX_ACCESS_TOKEN);
+		String key=getKey(KEY_SUFFIX_ACCESS_TOKEN);
 		Object obj = redisTemplate.opsForValue().get(key);
 		if (obj != null) {
 			return obj.toString();
@@ -102,15 +104,15 @@ public class ConfigStorageService implements ConfigStorageDao,InitializingBean{
 	}
 
 	@Override
-	public void setVerifyTicket(String verifyTicket, long timeout) {
-		String key = getKey(KEY_SUFFIX_VERIFY_TICKET);
-		redisTemplate.opsForValue().set(key, verifyTicket,timeout);
+	public void setJsapiTicket(String jsapiTicket, long timeout) {
+		String key = getKey(KEY_SUFFIX_JSAPI_TICKET);
+		redisTemplate.opsForValue().set(key, jsapiTicket,timeout, TimeUnit.SECONDS);
 	}
 
 	@Override
 	public void setAccessToken(String accessToken, long timeout) {
 		String key = getKey(KEY_SUFFIX_ACCESS_TOKEN);
-		redisTemplate.opsForValue().set(key, accessToken,timeout);
+		redisTemplate.opsForValue().set(key, accessToken,timeout, TimeUnit.SECONDS);
 	}
 
 }

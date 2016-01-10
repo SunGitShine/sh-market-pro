@@ -15,30 +15,44 @@ public class UserInfoService {
 
 	@Autowired
 	private UserInfoDao userDao;
-	
-	public void addUser(UserInfo user){
-		
+
+	public void addUser(UserInfo user) {
+		UserInfo userInfo = userDao.findByOpenId(user.getOpenid());
+		if (userInfo == null) {
+			userDao.add(user);
+		} else {
+			userDao.updateByOpenId(user.getOpenid());
+		}
 	}
-	
-	public PageModel<UserInfo> findByPage(int pageNo){
-		
-		PageModel<UserInfo> pageModel=new PageModel<UserInfo>();
-		List<UserInfo> userList=userDao.findByPage(pageNo-1, CommonData.PC_PAGESIZE);
-		
-		int totalNum=userDao.findTotalNum();
+
+	public PageModel<UserInfo> findByPage(int pageNo) {
+
+		PageModel<UserInfo> pageModel = new PageModel<UserInfo>();
+		List<UserInfo> userList = userDao.findByPage(pageNo - 1,
+				CommonData.PC_PAGESIZE);
+
+		int totalNum = userDao.findTotalNum();
 		pageModel.setPageNo(pageNo);
 		pageModel.setPageSize(CommonData.PC_PAGESIZE);
 		pageModel.setTotalRecords(totalNum);
 		pageModel.setRecords(userList);
 		return pageModel;
 	}
-	
-	public void deFriend(int userId){
+
+	public void deFriend(int userId) {
 		userDao.deFriend(userId);
 	}
-	
-	public void isFriend(int userId){
+
+	public void isFriend(int userId) {
 		userDao.isFriend(userId);
 	}
-}
 
+	public void delete(String openId) {
+		userDao.delete(openId);
+	}
+
+	public int getUserIdByOpenId(String openId) {
+		UserInfo user = userDao.findByOpenId(openId);
+		return user.getUserId();
+	}
+}

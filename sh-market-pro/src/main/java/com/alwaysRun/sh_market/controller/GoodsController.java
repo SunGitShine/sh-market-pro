@@ -3,6 +3,7 @@ package com.alwaysRun.sh_market.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alwaysRun.sh_market.bean.GoodsInfo;
 import com.alwaysRun.sh_market.service.GoodsService;
+import com.alwaysRun.sh_market.service.UserInfoService;
+import com.alwaysRun.sh_market.service.WeiXinService;
 import com.alwaysRun.sh_market.util.PageModel;
+import com.alwaysRun.sh_market.util.SignUtil;
 
 @Controller
 @RequestMapping(value="/goods")
@@ -23,6 +27,10 @@ public class GoodsController {
 	
 	@Autowired
 	private GoodsService goodsService;
+	@Autowired
+	private WeiXinService weiXinService;
+	@Autowired
+	private UserInfoService userInfoService;
 
 	@RequestMapping(value="/findAll", method = { RequestMethod.GET, RequestMethod.POST }, produces = { "application/json;charset=UTF-8" })
 	public String findAll(HttpServletRequest request,Model model){
@@ -70,6 +78,56 @@ public class GoodsController {
 		int goodsId=Integer.parseInt(request.getParameter("goodsId"));
 		GoodsInfo goods=goodsService.findById(goodsId);
 		map.put("goods", goods);
+		return map;
+	}
+	
+	@RequestMapping(value="/params", method = { RequestMethod.GET, RequestMethod.POST }, produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public ModelMap getParams(HttpServletRequest request,Model model){
+		ModelMap map=new ModelMap();
+		String url=request.getHeader("Referer");
+		System.out.println(url);
+		map.putAll(goodsService.getParams(url));
+		return map;
+	}
+	
+	@RequestMapping(value="/addGoods", method = { RequestMethod.GET, RequestMethod.POST }, produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public ModelMap addGoods(HttpServletRequest request,Model model ,HttpSession session){
+		ModelMap map=new ModelMap();
+		GoodsInfo goods=new GoodsInfo();
+		String location="";
+		String path = request.getRealPath("/");
+		System.out.println(path);
+		String[] str=path.split("\\\\");
+		for(int i=0;i<str.length-1;i++){
+			location=location+str[i]+"\\";
+		}
+		location=location+"pic\\";
+		System.out.println(location);
+		String code=request.getParameter("code");
+		System.out.println("code:"+code);
+		String openId=weiXinService.getOpenId(code);
+		int userId=userInfoService.getUserIdByOpenId(openId);
+		System.out.println("userid:"+userId);
+		int price=Integer.parseInt(request.getParameter("price"));
+		String title=request.getParameter("title");
+		String classify=request.getParameter("classify");
+		String contacts=request.getParameter("contacts");
+		String phone=request.getParameter("phone");
+		String QQ=request.getParameter("QQ");
+		String describe=request.getParameter("describe");
+		String serverIds=request.getParameter("serverIds");
+		goods.setClassify(classify);
+		goods.setContacts(contacts);
+		goods.setDescribe(describe);
+		goods.setPhone(phone);
+		goods.setPrice(price);
+		goods.setQQ(QQ);
+		goods.setTitle(title);
+		goods.setUserId(userId);
+		goodsService.addGoods(goods, serverIds, location);
+		map.put("result", "ok");
 		return map;
 	}
 }

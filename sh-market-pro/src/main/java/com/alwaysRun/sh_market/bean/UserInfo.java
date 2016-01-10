@@ -2,6 +2,8 @@ package com.alwaysRun.sh_market.bean;
 
 import java.io.Serializable;
 
+import com.alwaysRun.sh_market.json.WxMpGsonBuilder;
+
 public class UserInfo implements Serializable{
 
 	private int userId;
@@ -126,5 +128,9 @@ public class UserInfo implements Serializable{
 				+ subscribe_time + ", remark=" + remark + ", groupid="
 				+ groupid + ", status=" + status + ", isFriend=" + isFriend
 				+ ", memo=" + memo + "]";
+	}
+	
+	public static UserInfo fromJson(String json) {
+		return WxMpGsonBuilder.create().fromJson(json, UserInfo.class);
 	}
 }
