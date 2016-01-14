@@ -73,19 +73,19 @@
                                 <table class="table table-striped table-bordered table-hover datatable">
                                     <thead>
                                         <tr>
-                                            <th width="20%">头像</th>
+                                            <th width="10%">头像</th>
                                             <th width="15%">昵称</th>
                                             <th width="10%">性别</th>
                                             <th width="15%">城市</th>
                                             <th width="15%">关注时间</th>
-                                            <th width="10%">openId</th>
+                                            <th width="15%">openId</th>
                                             <th width="10%">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <c:forEach var="user" items="${data.records}">
                                         <tr>
-                                            <td>${user.headimgurl }</td>
+                                            <td><img alt="头像" src=${user.headimgurl }></td>
                                             <c:if test="${user.isFriend=='0'}">
                                             <td><font color="red">${user.nickname }</font></td>
                                             </c:if>

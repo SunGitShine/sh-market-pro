@@ -13,7 +13,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>商品列表</title>
   
     <meta name="description" content="">
     <meta name="author" content="">
@@ -51,7 +51,7 @@
                          <div  class="daohanglink" style="">
                            <span class="daohang"></span>
                            <span>首页</span><span>></span>
-                          
+                       
                            <span>商品管理</span>
                           <!--  <a  href="客户管理tab.html" class="label label-warning" style="float:right; margin:8px;">添加</a> -->
                          </div>
@@ -76,7 +76,14 @@
                                     <tbody>
                                     <c:forEach var="goods" items="${goodsList }">
                                         <tr>
-                                            <td>${goods.picture }</td>
+                                        <td><img alt="图片" src="" id="${goods.goodsId}" width="80px" height="80px"></td>
+                                        <script type="text/javascript">
+                                        	var pic=new Array();
+                                        	var imgs="${goods.picture}";
+                                        	pic=imgs.split(",");
+                                        	var id="${goods.goodsId}";
+                                        	document.getElementById(id).setAttribute("src", "http://wxdv.berbon.com/pic/"+pic[0]);
+                                        </script>
                                             <c:if test="${goods.classify=='0'}">
                                             <td><font color="red">${goods.memo }</font></td>
                                             </c:if>

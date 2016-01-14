@@ -67,4 +67,16 @@ public class GoodsService {
 		goodsDao.add(goods);
 		return true;
 	}
+	
+	public void usable(int goodsId){
+		goodsDao.usabel(goodsId);
+	}
+	
+	public void unUsable(int goodsId){
+		goodsDao.unUsabel(goodsId);
+	}
+	
+	public void update(GoodsInfo goods){
+		goodsDao.update(goods);
+	}
 }

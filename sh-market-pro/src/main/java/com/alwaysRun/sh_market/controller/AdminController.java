@@ -1,6 +1,7 @@
 package com.alwaysRun.sh_market.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,13 +23,14 @@ public class AdminController {
 	
 	@RequestMapping(value="/login",method = { RequestMethod.GET, RequestMethod.POST },produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
-	public ModelMap login(HttpServletRequest request){
+	public ModelMap login(HttpServletRequest request,HttpSession httpSession){
 //		ModelAndView modelAndView=new ModelAndView();
 		ModelMap map=new ModelMap();
 		String userName=request.getParameter("userName");
 		String psw=request.getParameter("psw");
 		if(adminService.login(userName, psw)){
 //			modelAndView.setViewName("index");
+			httpSession.setAttribute("user", userName);
 			map.put("msg", "");
 		}else{
 //			modelAndView.setViewName("login");

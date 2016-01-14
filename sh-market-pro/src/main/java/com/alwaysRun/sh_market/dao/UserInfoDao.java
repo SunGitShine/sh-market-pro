@@ -57,4 +57,10 @@ public interface UserInfoDao {
 	 * @param userId
 	 */
 	void isFriend(@Param("userId") int userId);
+	
+	/**
+	 * 通过userId查询用户信息
+	 * @param userId
+	 */
+	UserInfo findByUserId(@Param("userId") int userId);
 }

@@ -122,4 +122,12 @@
 	    <property name="mapperInterface" value="com.alwaysRun.sh_market.dao.GoodsInfoDao"></property>
 	    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	
+	<!-- <mvc:interceptors>  
+        <mvc:interceptor>  
+            <mvc:mapping path="/*.htm" />  
+            <mvc:mapping path="/*/*.htm" />  
+            <bean class="com.alwaysRun.sh_market.util.LoginInterceptor"/>  
+        </mvc:interceptor>  
+    </mvc:interceptors>  -->
 </beans>

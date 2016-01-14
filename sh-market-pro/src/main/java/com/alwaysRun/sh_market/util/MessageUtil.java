@@ -62,7 +62,7 @@ public class MessageUtil {
 		ViewButton button3=new ViewButton();
 		button3.setName("我的");
 		button3.setType("view");
-		button3.setUrl("http://www.baidu.com");
+		button3.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0b188a4414d9a5fc&redirect_uri=http://wxdv.berbon.com/sh-market-web/user.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
 		
 		menu.setButton(new Button[]{button1,button2,button3});
 		

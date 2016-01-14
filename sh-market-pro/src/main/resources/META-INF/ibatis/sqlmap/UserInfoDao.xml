@@ -91,4 +91,11 @@
 		userId=#{userId}
 	</update>
 
+	<select id="findByUserId" resultMap="userInfo" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="allColumn" />
+		FROM `user_info`
+		WHERE
+		userId=#{userId}
+	</select>
 </mapper>

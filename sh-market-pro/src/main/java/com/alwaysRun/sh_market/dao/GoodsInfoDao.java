@@ -55,4 +55,17 @@ public interface GoodsInfoDao {
 			@Param("userId") int userId);
 	
 	List<GoodsInfo> findAll(@Param("classify") String classify);
+	
+	/**
+	 * 上架商品
+	 * @param goodsId
+	 */
+	void usabel(@Param("goodsId") int goodsId);
+	
+	/**
+	 * 下架商品
+	 * @param goodsId
+	 */
+	void unUsabel(@Param("goodsId") int goodsId);
+	
 }

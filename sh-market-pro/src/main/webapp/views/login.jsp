@@ -16,7 +16,7 @@
 
 <META http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<TITLE>登录页面</TITLE>
+<TITLE>用户登录页面</TITLE>
 
 <SCRIPT src="<%=path %>/js/jquery-1.9.1.min.js" type="text/javascript"></SCRIPT>
 

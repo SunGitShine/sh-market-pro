@@ -17,11 +17,12 @@
 		<result property="picture" column="picture" />
 		<result property="status" column="status" />
 		<result property="memo" column="memo" />
+		<result property="usable" column="usable" />
 	</resultMap>
 
 	<sql id="allColumn">
-		`goodsId`,`title`,`price`,`price`,`classify`,`publishTime`,`contacts`,`phone`,
-		`QQ`,`describe`,`picture`,`status`,`memo`
+		`goodsId`,`userId`,`title`,`price`,`price`,`classify`,`publishTime`,`contacts`,`phone`,
+		`QQ`,`describe`,`picture`,`status`,`memo`,usable
 	</sql>
 
 	<insert id="add" parameterType="GoodsInfo">
@@ -70,7 +71,7 @@
 		status = 1
 	</select>
 
-	<select id="findByPage" resultMap="goodsInfo">
+	<!-- <select id="findByPage" resultMap="goodsInfo">
 		SELECT
 		<include refid="allColumn" />
 		FROM `goods_info`
@@ -83,9 +84,29 @@
 			AND classify=#{classify}
 		</if>
 		LIMIT #{pageNo}, #{pageSize}
+	</select> -->
+	
+	<select id="findByPage" resultMap="goodsInfo">
+		SELECT
+		t1.contacts,t1.`describe`,t1.goodsId,t1.phone,t1.picture,t1.price,t1.publishTime,t1.QQ,t1.`status`,t1.title,t2.nickname
+		AS memo,t2.isFriend AS classify,t2.isFriend,t1.usable FROM goods_info AS t1 LEFT JOIN user_info AS t2 ON
+		t1.userId=t2.userId
+		WHERE t1.`status` = 1
+		AND t2.isFriend=1
+		<if test="userId == 0">
+			AND t1.usable=1
+		</if>
+		<if test="userId != 0">
+			AND t1.userId=#{userId}
+		</if>
+		<if test="classify != null and classify != ''">
+			AND t1.classify=#{classify}
+		</if>
+		ORDER BY t1.publishTime DESC
+		LIMIT #{pageNo}, #{pageSize}
 	</select>
 
-	<select id="findToTalNum" resultType="java.lang.Integer">
+	<!-- <select id="findToTalNum" resultType="java.lang.Integer">
 		SELECT
 		COUNT(1)
 		FROM `goods_info`
@@ -97,15 +118,68 @@
 		<if test="classify != null and classify != ''">
 			AND classify=#{classify}
 		</if>
+	</select> -->
+	
+	<select id="findToTalNum" resultType="java.lang.Integer">
+		SELECT COUNT(1) FROM (
+		SELECT
+		t1.contacts,t1.`describe`,t1.goodsId,t1.phone,t1.picture,t1.price,t1.publishTime,t1.QQ,t1.`status`,t1.title,t2.nickname
+		AS memo,t2.isFriend AS classify,t2.isFriend,t1.usable FROM goods_info AS t1 LEFT JOIN user_info AS t2 ON
+		t1.userId=t2.userId
+		WHERE t1.`status` = 1
+		AND t2.isFriend=1
+		AND t1.usable=1
+		<if test="userId == 0">
+			AND t1.usable=1
+		</if>
+		<if test="userId != 0">
+			AND t1.userId=#{userId}
+		</if>
+		<if test="classify != null and classify != ''">
+			AND t1.classify=#{classify}
+		</if>
+		ORDER BY t1.publishTime DESC) temp
 	</select>
 
 	<select id="findAll" resultMap="goodsInfo">
 		SELECT
 		t1.contacts,t1.`describe`,t1.goodsId,t1.phone,t1.picture,t1.price,t1.publishTime,t1.QQ,t1.`status`,t1.title,t2.nickname
-		AS memo,t2.isFriend AS classify FROM goods_info AS t1 LEFT JOIN user_info AS t2 ON
+		AS memo,t2.isFriend AS classify,t2.isFriend,t1.usable FROM goods_info AS t1 LEFT JOIN user_info AS t2 ON
 		t1.userId=t2.userId
 		WHERE t1.classify=#{classify}
 		AND t1.`status` = 1
+		AND t2.isFriend=1
+		ORDER BY t1.publishTime DESC
 	</select>
 
+	<update id="usabel" parameterType="java.lang.Integer">
+		UPDATE
+		`goods_info` SET
+		usable = 1
+		WHERE
+		goodsId=#{goodsId}
+	</update>
+	
+	<update id="unUsabel" parameterType="java.lang.Integer">
+		UPDATE
+		`goods_info` SET
+		usable = 0
+		WHERE
+		goodsId=#{goodsId}
+	</update>
+	
+	<!-- <update id="update" parameterMap="goodsInfo">
+		UPDATE
+		`goods_info` SET
+		`title`=#{title},
+		`price`=#{price},
+		`classify`=#{classify},
+		`contacts`=#{contacts},
+		`phone`=#{phone},
+		`QQ`=#{QQ},
+		`describe`=#{describe},
+		`publishTime`=now()
+		WHERE
+		`goodsId`=#{goodsId}
+	</update> -->
 </mapper>

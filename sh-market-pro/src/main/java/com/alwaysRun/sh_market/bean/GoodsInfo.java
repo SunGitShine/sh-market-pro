@@ -17,6 +17,7 @@ public class GoodsInfo implements Serializable{
 	private String picture;
 	private String status;
 	private String memo;
+	private int usable;
 	public int getGoodsId() {
 		return goodsId;
 	}
@@ -95,6 +96,13 @@ public class GoodsInfo implements Serializable{
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	public int getUsable() {
+		return usable;
+	}
+	public void setUsable(int usable) {
+		this.usable = usable;
+	}
+	
 	@Override
 	public String toString() {
 		return "GoodsInfo [goodsId=" + goodsId + ", userId=" + userId
@@ -102,6 +110,6 @@ public class GoodsInfo implements Serializable{
 				+ classify + ", publishTime=" + publishTime + ", contacts="
 				+ contacts + ", phone=" + phone + ", QQ=" + QQ + ", describe="
 				+ describe + ", picture=" + picture + ", status=" + status
-				+ ", memo=" + memo + "]";
+				+ ", memo=" + memo + ", usable=" + usable + "]";
 	}
 }

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-${name} 
+<img alt="图片" src="http://wxdv.berbon.com/pic/1-0.jpg" id="17" width="80px" height="80px">
 </body>
 </html>
